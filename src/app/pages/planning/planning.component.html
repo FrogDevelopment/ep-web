@@ -1,0 +1,28 @@
+<nz-table #basicTable [nzData]="data"
+          [nzFrontPagination]="false"
+          nzBordered>
+  <thead>
+  <tr>
+    <th>Day</th>
+    <th>Times</th>
+    <th>Duration</th>
+    <th>Bracelets</th>
+    <th>Fouilles</th>
+    <th>Litiges</th>
+    <th>Total</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.dayOfWeek }}</td>
+    <td>{{ data.startTime }} - {{ data.endTime }}</td>
+    <td>{{ data.duration }}</td>
+    <td nzTooltipTitle="actual / expected" nz-tooltip>{{ data.actualBracelet }} / {{ data.expectedBracelet }}</td>
+    <td nzTooltipTitle="actual / expected" nz-tooltip>{{ data.actualFouille }} / {{ data.expectedFouille }}</td>
+    <td nzTooltipTitle="actual / expected" nz-tooltip>{{ data.actualLitiges }} / {{ data.expectedLitiges }}</td>
+    <td nzTooltipTitle="actual / expected" nz-tooltip>{{ data.actualTotal }} / {{ data.expectedTotal }}</td>
+    <td nzBreakWord><pre>{{ data.description }}</pre></td>
+  </tr>
+  </tbody>
+</nz-table>

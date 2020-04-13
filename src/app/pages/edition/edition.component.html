@@ -1,0 +1,11 @@
+<nz-date-picker
+  nzFormat="dd/MM/yyyy"
+  [(ngModel)]="selectedDate"
+  [nzDisabledDate]="disabledDate"
+>
+</nz-date-picker>
+<button nz-button
+        nzType="default"
+        (click)="onValidate()"
+>Validate
+</button>

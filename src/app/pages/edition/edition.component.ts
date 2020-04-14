@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
-import {PlanningService} from '../../services/planning/planning.service';
 import {NzMessageService} from 'ng-zorro-antd';
+import {EditionService} from '../../services/edition/edition.service';
 
 @Component({
   selector: 'app-edition',
@@ -12,8 +12,9 @@ export class EditionComponent implements OnInit {
   juneStart = new Date();
   juneEnd = new Date();
   selectedDate: Date;
+  deadline: number;
 
-  constructor(private planningService: PlanningService,
+  constructor(private editionService: EditionService,
               private message: NzMessageService) {
     this.juneStart.setMonth(5);
     this.juneStart.setDate(1);
@@ -22,24 +23,25 @@ export class EditionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.planningService.getEdition()
+    this.editionService.getEdition()
     .subscribe(date => {
-        this.selectedDate = date;
+        this.selectedDate = new Date(date[0], date[1] - 1, date[2]);
+        this.deadline = this.selectedDate.getTime();
       }
       ,
       () => this.handleError());
   }
 
-
-  disabledDate = (current: Date): boolean => {
+  disabledDate(current: Date): boolean {
     return differenceInCalendarDays(this.juneStart, current) > 0
       || differenceInCalendarDays(current, this.juneEnd) > 0;
-  };
+  }
 
   onValidate() {
-    this.planningService.setEdition(this.selectedDate)
+    this.editionService.setEdition(this.selectedDate)
     .subscribe(
       _ => {
+        this.deadline = this.selectedDate.getMilliseconds();
       }
       ,
       () => this.handleError());

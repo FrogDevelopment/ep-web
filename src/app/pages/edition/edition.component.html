@@ -9,3 +9,11 @@
         (click)="onValidate()"
 >Validate
 </button>
+
+<nz-row [nzGutter]="16">
+  <nz-col [nzSpan]="24" style="margin-top: 32px;">
+    <nz-countdown [nzValue]="deadline"
+                  [nzTitle]="'Compte à rebours'"
+                  [nzFormat]="'MM DDj HH:mm:ss:SSS'"></nz-countdown>
+  </nz-col>
+</nz-row>

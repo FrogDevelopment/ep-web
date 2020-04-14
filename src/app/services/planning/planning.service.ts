@@ -28,11 +28,4 @@ export class PlanningService {
     return this.http.request('delete', `${environment.baseUrl}/timetables`, {body: timetable});
   }
 
-  getEdition(): Observable<Date> {
-    return this.http.get<Date>(`${environment.baseUrl}/timetables/edition`);
-  }
-
-  setEdition(date: Date): Observable<void> {
-    return this.http.put<void>(`${environment.baseUrl}/timetables/edition`, date);
-  }
 }
